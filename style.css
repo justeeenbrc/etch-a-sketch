@@ -1,0 +1,27 @@
+
+:root {
+    --grid-cols: 1;
+    --grid-rows: 1;
+  }
+  
+  #container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    grid-template-rows: repeat(var(--grid-rows), 1fr);
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+    height: 320px;
+    width: 320px;
+  }
+  
+  .grid-item {
+    gap: 0px    ;
+    border: 1px solid #ddd;
+    height: 20px;
+    width: 20px;
+  }
+  .grid-item:hover {
+    background-color: red;
+  }
