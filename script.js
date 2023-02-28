@@ -1,12 +1,44 @@
-const container = document.querySelector("#container");
+const container = document.querySelector('.container')
+const gridSize = document.querySelector('.size')
+let size = gridSize.value;
+const color = document.querySelector('.colorPicker')
+let draw = false;
+const resetBtn = document.querySelector('.resetBtn')
 
-function makeRows(rows, cols) {
-  container.style.setProperty('--grid-rows', rows);
-  container.style.setProperty('--grid-cols', cols);
-  for (c = 0; c < (rows * cols); c++) {
-    let cell = document.createElement("div");
-    container.appendChild(cell).className = "grid-item";
-  };
-};
+function makeGrid (size) {
+  container.style.setProperty('--size', size)
+  for(let i = 0; i<size*size; i++){
+    const div = document.createElement('div')
+    div.classList.add('pixel')
+    div.addEventListener('mouseover', function(){
+      if(!draw) return
+      div.style.backgroundColor = color.value
+    })
+    div.addEventListener('mousedown', function(){
+      if(!draw) return
+      div.style.backgroundColor = color.value
+    })
+    container.appendChild(div)
+  }
+}
 
-makeRows(16, 16);
+window.addEventListener('mousedown', function(){
+    draw = true;
+})
+window.addEventListener('mouseup', function(){
+  draw = false;
+})
+
+function reset(){
+  container.innerHTML = ''
+  makeGrid(size)
+}
+
+resetBtn.addEventListener('click', reset)
+
+gridSize.addEventListener('change', function(){
+  size=gridSize.value
+  reset()
+})
+
+makeGrid(size)
